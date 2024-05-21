@@ -61,13 +61,12 @@ namespace AppDemo.Azure
 
         }
 
-        [FunctionName("Function2")]
+        [FunctionName("email")]
         public static async Task<IActionResult> Run2(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "Funtion2/{banner_id}")] HttpRequest req,
-            string banner_id,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "email")] HttpRequest req,
             ILogger log)
         {
-            var message = "Bienvenido";
+            var message = "Se está enviando un mensaje...";
             return new OkObjectResult(message);
         }
     }
