@@ -1,49 +1,49 @@
-﻿using AppDemo.Domain;
+﻿using AppDemo.Aplications.Services;
+using AppDemo.Domain;
 using AppDemo.Domain.Interfaces.Repositories;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AppDemo.Azure.Infrastructure.Repositories
 {
-    internal class StudentRepository : IStudentRepository<Student, string>
+    internal class StudentRepository : IStudentRepository
     {
-        public Student GetById(string entityId)
+        public async Task<Student> GetById(string entityId)
         {
-            var idStudent = entityId.ToString();
-            var student = new Student();
+            string apiUrl = "https://wsexternal.usfq.edu.ec/WSApisUSFQ-TEST/api/Estudiante/InfoEstudiante?banner_id=" + entityId;
 
-            switch (idStudent)
+            AuthService authService = new AuthService();
+            var token = await authService.GenerateTokenExternal();
+            using (HttpClient client = new())
             {
-                case "1751633578":
-                    student.banner_id = "1751633578";
-                    student.nombre_completo = "Victor Hernández";
-                    student.correo_usfq = "victor@usf.com";
-                    break;
-                case "1752233578":
-                    student.banner_id = "1752233578";
-                    student.nombre_completo = "Andrea Fernandéz";
-                    student.correo_usfq = "andrea@usf.com";
-                    break;
+                try
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                case "1750033578":
-                    student.banner_id = "1750033578";
-                    student.nombre_completo = "Lucía Gonzáles";
-                    student.correo_usfq = "luc@usf.com";
-                    break;
-                case "1759993578":
-                    student.banner_id = "1759993578";
-                    student.nombre_completo = "Juan Ramiréz";
-                    student.correo_usfq = "juan@usf.com";
-                    break;
-                default:
-                    student = null;
-                    break;
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResponse = await response.Content.ReadAsStringAsync();
+
+                        Student student = JsonConvert.DeserializeObject<Student>(jsonResponse);
+
+                        return student;
+                    }
+
+                    throw new InvalidOperationException("Estudiante no existe");
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(ex.Message);
+                }
             }
-
-            return student;
         }
     }
 }

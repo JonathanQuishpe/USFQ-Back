@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Aplications.Interfaces
 {
-    internal interface IStudentService<TEntity, TEntityId>: IStudent<TEntity, TEntityId>
+    internal interface IStudentService: IStudent
     {
 
     }

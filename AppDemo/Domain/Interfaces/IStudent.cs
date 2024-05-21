@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Domain.Interfaces
 {
-    public interface IStudent<TEntity, TEntityId>
+    public interface IStudent
     {
-        TEntity GetById(TEntityId entityId);
+        Task<Student> GetById(string entityId);
     }
 }

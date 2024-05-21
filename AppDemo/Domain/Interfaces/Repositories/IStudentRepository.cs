@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Domain.Interfaces.Repositories
 {
-    public interface IStudentRepository<TEntity, TEntityId>: IStudent<TEntity, TEntityId>
+    public interface IStudentRepository: IStudent
     {
     }
 }

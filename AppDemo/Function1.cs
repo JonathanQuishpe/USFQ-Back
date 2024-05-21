@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using AppDemo.Azure.Aplications.Services;
 using AppDemo.Azure.Infrastructure.Repositories;
 using System.Runtime.CompilerServices;
+using AppDemo.Aplications.Services;
+using AppDemo.Domain;
 
 namespace AppDemo.Azure
 {
@@ -22,21 +24,41 @@ namespace AppDemo.Azure
             return service;
         }
 
-        [FunctionName("Function1")]
+        static AuthService auth()
+        {
+            return new AuthService();
+        }
+
+        [FunctionName("GetStudent")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "Funtion1/{banner_id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "Student/{banner_id}")] HttpRequest req,
             string banner_id,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            var student = getService().GetById(banner_id);
+            try
+            {
+                var student = await getService().GetById(banner_id);
+                var response = new
+                {
+                    data = student,
+                    status = true
+                };
 
-            //string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            //dynamic data = JsonConvert.DeserializeObject(requestBody);
-            //name = name ?? data?.name;
+                return new OkObjectResult(response);
+            }
+            catch (Exception ex)
+            {
+                var response = new
+                {
+                    status = false,
+                    message = ex.Message
+                };
 
-            return new OkObjectResult(student);
+                return new OkObjectResult(response);
+            }
+
         }
 
         [FunctionName("Function2")]

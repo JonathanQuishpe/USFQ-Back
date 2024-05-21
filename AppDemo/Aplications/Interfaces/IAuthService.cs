@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Aplications.Interfaces
 {
-    internal interface IAuthService<TEntity>: IAuth<TEntity>
+    public interface IAuthService
     {
+        Task<string> GenerateTokenExternal();
     }
 }
