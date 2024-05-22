@@ -25,12 +25,6 @@ namespace AppDemo.Azure
             return service;
         }
 
-        static AuthService auth()
-        {
-            AuthRepository repo = new AuthRepository();
-            return new AuthService(repo);
-        }
-
         [FunctionName("GetStudent")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "Student/{banner_id}")] HttpRequest req,
@@ -64,7 +58,7 @@ namespace AppDemo.Azure
         }
 
         [FunctionName("email")]
-        public static async Task<IActionResult> Run2(
+        public static IActionResult Run2(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "email")] HttpRequest req,
             ILogger log)
         {
