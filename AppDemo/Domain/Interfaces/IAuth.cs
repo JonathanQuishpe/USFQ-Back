@@ -9,5 +9,7 @@ namespace AppDemo.Domain.Interfaces
     public interface IAuth
     {
         Task<string> GetToken();
+
+        Task<Auth> GetAuth();
     }
 }

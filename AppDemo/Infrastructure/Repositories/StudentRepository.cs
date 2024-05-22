@@ -27,7 +27,9 @@ namespace AppDemo.Azure.Infrastructure.Repositories
             string apiUrl = "https://wsexternal.usfq.edu.ec/WSApisUSFQ-TEST/api/Estudiante/InfoEstudiante?banner_id=" + entityId;
 
             AuthService authService = getServiceAuth();
-            var token = await authService.GenerateTokenExternal();
+            var auth = await authService.GetAuth();
+            var token = auth.access_token;
+
             using (HttpClient client = new())
             {
                 try

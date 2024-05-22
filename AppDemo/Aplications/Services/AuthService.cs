@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Aplications.Services
 {
-    internal class AuthService : IAuthService
+    public class AuthService : IAuthService
     {
 
         private readonly IAuthRepository _authRepository;
@@ -21,7 +21,13 @@ namespace AppDemo.Aplications.Services
             _authRepository = authRepository;
         }
 
-        public async Task<string> GenerateTokenExternal()
+
+        public async Task<Auth> GetAuth()
+        {
+            return await _authRepository.GetAuth();
+        }
+
+        public async Task<string> GetToken()
         {
             return await _authRepository.GetToken();
         }

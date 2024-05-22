@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Domain
 {
-    internal class Auth
+    public class Auth
     {
         public string access_token { get; set; }
 
