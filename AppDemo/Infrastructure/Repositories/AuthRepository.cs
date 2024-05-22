@@ -50,36 +50,5 @@ namespace AppDemo.Infrastructure.Repositories
             }
         }
 
-        public async Task<string> GetToken()
-        {
-            using (var httpClient = new HttpClient())
-            {
-                try
-                {
-                    var formData = new MultipartFormDataContent();
-
-                    formData.Add(new StringContent("testnexti_s32j0@!sdf56"), "client_id");
-                    formData.Add(new StringContent("ewrfu6-trksa32-ghh673edd-dfg-fe4567ds"), "client_secret");
-                    formData.Add(new StringContent("client_credentials"), "grant_type");
-
-                    HttpResponseMessage response = await httpClient.PostAsync(apiUrl, formData);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                        Auth auth = JsonConvert.DeserializeObject<Auth>(apiResponse);
-                        return auth.access_token;
-                    }
-           
-                    throw new InvalidOperationException("Error");
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException(ex.Message);
-                }
-
-            }
-        }
-
     }
 }

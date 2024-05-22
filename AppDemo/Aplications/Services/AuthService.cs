@@ -27,9 +27,5 @@ namespace AppDemo.Aplications.Services
             return await _authRepository.GetAuth();
         }
 
-        public async Task<string> GetToken()
-        {
-            return await _authRepository.GetToken();
-        }
     }
 }
