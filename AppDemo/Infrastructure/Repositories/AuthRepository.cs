@@ -1,6 +1,7 @@
 ﻿using AppDemo.Domain;
 using AppDemo.Domain.Interfaces;
 using AppDemo.Domain.Interfaces.Repositories;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,8 @@ namespace AppDemo.Infrastructure.Repositories
                     if (response.IsSuccessStatusCode)
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
-                        string access_token = Newtonsoft.Json.Linq.JObject.Parse(apiResponse)["access_token"].ToString();
-                        return access_token;
+                        Auth auth = JsonConvert.DeserializeObject<Auth>(apiResponse);
+                        return auth.access_token;
                     }
                     throw new InvalidOperationException("Error");
                 }
