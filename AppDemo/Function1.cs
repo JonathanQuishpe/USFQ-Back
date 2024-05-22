@@ -12,6 +12,7 @@ using AppDemo.Azure.Infrastructure.Repositories;
 using System.Runtime.CompilerServices;
 using AppDemo.Aplications.Services;
 using AppDemo.Domain;
+using AppDemo.Infrastructure.Repositories;
 
 namespace AppDemo.Azure
 {
@@ -26,7 +27,8 @@ namespace AppDemo.Azure
 
         static AuthService auth()
         {
-            return new AuthService();
+            AuthRepository repo = new AuthRepository();
+            return new AuthService(repo);
         }
 
         [FunctionName("GetStudent")]

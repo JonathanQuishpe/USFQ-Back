@@ -9,16 +9,24 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using AppDemo.Infrastructure.Repositories;
 
 namespace AppDemo.Azure.Infrastructure.Repositories
 {
     internal class StudentRepository : IStudentRepository
     {
+
+        static AuthService getServiceAuth()
+        {
+            AuthRepository repo = new AuthRepository();
+            return new AuthService(repo);
+        }
+
         public async Task<Student> GetById(string entityId)
         {
             string apiUrl = "https://wsexternal.usfq.edu.ec/WSApisUSFQ-TEST/api/Estudiante/InfoEstudiante?banner_id=" + entityId;
 
-            AuthService authService = new AuthService();
+            AuthService authService = getServiceAuth();
             var token = await authService.GenerateTokenExternal();
             using (HttpClient client = new())
             {

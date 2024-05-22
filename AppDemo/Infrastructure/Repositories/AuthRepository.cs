@@ -1,6 +1,7 @@
 ﻿using AppDemo.Domain;
 using AppDemo.Domain.Interfaces;
 using AppDemo.Domain.Interfaces.Repositories;
+using AppDemo.Infrastructure.MyAdapters.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Infrastructure.Repositories
 {
-    public class AuthRepository : IAuthRepository<Auth>
+    public class AuthRepository : IAuthRepository
     {
-        Auth IAuth<Auth>.GetToken()
+        public Task<string> GetToken()
         {
-            throw new NotImplementedException();
+            AuthAdapterInput adapter = new AuthAdapterInput();
+            return adapter.GetToken();
         }
+
     }
 }

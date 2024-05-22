@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Domain.Interfaces
 {
-    public interface IAuth<TEntity>
+    public interface IAuth
     {
-        public TEntity GetToken();
+        Task<string> GetToken();
     }
 }

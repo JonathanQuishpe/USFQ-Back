@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppDemo.Domain.Interfaces.Repositories
 {
-    public interface IAuthRepository<TEntity>: IAuth<TEntity>
+    public interface IAuthRepository: IAuth
     {
     }
 }
