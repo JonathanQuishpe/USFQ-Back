@@ -9,5 +9,6 @@ namespace AppDemo.Domain.Interfaces
     public interface IStudent
     {
         Task<Student> GetById(string entityId);
+        Task<string> SendEmail(string email);
     }
 }

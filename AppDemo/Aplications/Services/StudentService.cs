@@ -24,5 +24,10 @@ namespace AppDemo.Azure.Aplications.Services
         {
             return this._studentRepository.GetById(entityId);
         }
+
+        public Task<string> SendEmail(string email)
+        {
+            return this._studentRepository.SendEmail(email);
+        }
     }
 }
