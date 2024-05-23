@@ -1,19 +1,14 @@
 ﻿using AppDemo.Domain;
-using AppDemo.Domain.Interfaces;
-using AppDemo.Domain.Interfaces.Repositories;
+using AppDemo.Infrastructure.Ports.Output.Repositories;
 using Newtonsoft.Json;
 using System;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace AppDemo.Infrastructure.Repositories
+namespace AppDemo.Infrastructure.MyAdapters.Output.Repositories
 {
 
- 
+
     public class AuthRepository : IAuthRepository
     {
 

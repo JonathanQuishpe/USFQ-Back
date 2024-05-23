@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppDemo.Domain.Interfaces
+namespace AppDemo.Infrastructure.Ports.Output
 {
-    public interface IAuth
+    public interface IAdd<TEntity>
     {
-
-        Task<Auth> GetAuth();
+        TEntity Add(TEntity entity);
     }
 }

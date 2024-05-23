@@ -1,22 +1,18 @@
-﻿using AppDemo.Aplications.Services;
-using AppDemo.Domain;
-using AppDemo.Domain.Interfaces.Repositories;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using AppDemo.Infrastructure.Repositories;
 using Mailjet.Client;
 using Newtonsoft.Json.Linq;
 using Mailjet.Client.Resources;
+using AppDemo.Infrastructure.Ports.Output.Repositories;
+using AppDemo.Domain;
+using AppDemo.Aplications;
 
-namespace AppDemo.Azure.Infrastructure.Repositories
+namespace AppDemo.Infrastructure.MyAdapters.Output.Repositories
 {
-    internal class StudentRepository : IStudentRepository
+    internal class StudentRepository : IAsyncEntityRepository<Student>
     {
 
         static AuthService getServiceAuth()

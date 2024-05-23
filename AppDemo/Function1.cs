@@ -1,18 +1,13 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using AppDemo.Azure.Aplications.Services;
-using AppDemo.Azure.Infrastructure.Repositories;
-using System.Runtime.CompilerServices;
-using AppDemo.Aplications.Services;
-using AppDemo.Domain;
-using AppDemo.Infrastructure.Repositories;
+using AppDemo.Infrastructure.MyAdapters.Output.Repositories;
+using AppDemo.Aplications;
+
 
 namespace AppDemo.Azure
 {
